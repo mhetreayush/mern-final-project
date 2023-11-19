@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useState, useRef } from "react";
+import { useContext } from "react";
 import axios from "axios";
 import { SongContext } from "../Context/SongContext";
 import { decodeToken } from "react-jwt";
@@ -9,7 +9,7 @@ import { CgRemoveR } from "react-icons/cg";
 import { FetchContext } from "../Context/FetchContext";
 import { BACKEND_URL } from "../constants";
 
-const PlaylilstSong = ({ title, artistName, songSrc, playlistId }) => {
+const PlaylistSong = ({ title, artistName, songSrc, playlistId }) => {
   const { song, audio, __URL__ } = useContext(SongContext);
   const { setFetchPlaylist } = useContext(FetchContext);
   const navigate = useNavigate();
@@ -69,4 +69,4 @@ const PlaylilstSong = ({ title, artistName, songSrc, playlistId }) => {
   );
 };
 
-export default PlaylilstSong;
+export default PlaylistSong;

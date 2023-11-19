@@ -1,19 +1,19 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { FetchContext } from "../Context/FetchContext";
 import { SongContext } from "../Context/SongContext";
-import PlaylilstSong from "../components/PlaylilstSong";
+import PlaylistSong from "../components/PlaylistSong";
 import { MdDeleteForever } from "react-icons/md";
 
 const Playlist = () => {
-  const { id } = useParams();  //gettnig the id from the url
+  const { id } = useParams(); //gettnig the id from the url
   const navigate = useNavigate(); // for navigation
   const [playList, setPlayList] = useState(null); // state for the playlist
   const [loading, setLoading] = useState(false);
-  const {fetchPlaylist} = useContext(FetchContext)
-  const {__URL__} = useContext(SongContext)
-  
+  const { fetchPlaylist } = useContext(FetchContext);
+  const { __URL__ } = useContext(SongContext);
+
   // headers for the api calls
   const headers = {
     "Content-Type": "application/json",
@@ -43,10 +43,9 @@ const Playlist = () => {
 
   // get playlist
   const getPlaylist = async () => {
-    const { data } = await axios.get(
-      `${__URL__}/api/v1/playlist/${id}`,
-      { headers }
-    );
+    const { data } = await axios.get(`${__URL__}/api/v1/playlist/${id}`, {
+      headers,
+    });
     setPlayList(data["playlist"]);
   };
 
@@ -62,7 +61,9 @@ const Playlist = () => {
       <div className="lg:mt-10 flex justify-between items-center px-1 lg:w-[70vw]">
         <div>
           <h2 className="text-xl lg:text-4xl">{playList.playlistName}</h2>
-          <p className="text-md lg:text-lg`">Songs - {playList.songs.length} </p>
+          <p className="text-md lg:text-lg`">
+            Songs - {playList.songs.length}{" "}
+          </p>
         </div>
         <div>
           <button onClick={handleDelete}>
@@ -76,7 +77,7 @@ const Playlist = () => {
         ) : (
           playList.songs.map((song, index) => {
             return (
-              <PlaylilstSong
+              <PlaylistSong
                 key={index}
                 title={song.title}
                 artistName={song.artistName}
